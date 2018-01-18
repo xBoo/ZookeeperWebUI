@@ -35,6 +35,8 @@ namespace ZookeeperClient
         Task<T> GetDataAsync<T>(string path, bool isReturnNullIfPathNotExists);
         Task<ZKData<T>> GetZKDataAsync<T>(string path);
         Task<ZKData<T>> GetZKDataAsync<T>(string path, bool isReturnNullIfPathNotExists);
+        Task<DataResult> GetDataResultAsync(string path);
+        Task<DataResult> GetDataResultAsync(string path, bool isReturnNullIfPathNotExists);
         Task process(WatchedEvent @event);
         Task SetACLAsync(string path, List<ACL> acls);
         Task SetDataAsync(string path, object data);

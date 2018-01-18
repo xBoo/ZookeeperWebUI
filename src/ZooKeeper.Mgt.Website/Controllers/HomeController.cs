@@ -32,15 +32,24 @@ namespace ZooKeeper.Mgt.Website.Controllers
 
         public async Task<BizResult<List<TreeNode>>> GetNodes(string path, int? parentId)
         {
-            if (string.IsNullOrEmpty(path))
+            if (string.IsNullOrEmpty(path)) path = "/";
+
+            if (path != "/")
             {
-                path = "/";
                 var nodes = await GetChildrenNodesAsync(path, parentId, false);
                 return new BizResult<List<TreeNode>>(nodes);
             }
             else
             {
-                return new BizResult<List<TreeNode>>(null);
+                var returnNodes = new List<TreeNode>();
+                var rootNode = (await GetChildrenNodesAsync(path, parentId, true)).FirstOrDefault(w => w.name == _configuration["RootNodeName"]);
+
+                if (rootNode == null) return new BizResult<List<TreeNode>>(null, -1, "未找到配置对应的根节点！");
+
+                returnNodes.Add(rootNode);
+                var children = await GetChildrenNodesAsync(rootNode.bakValue, rootNode.id, false);
+                returnNodes.AddRange(children.OrderBy(o => o.isParent));
+                return new BizResult<List<TreeNode>>(returnNodes);
             }
         }
 
@@ -48,20 +57,21 @@ namespace ZooKeeper.Mgt.Website.Controllers
         {
             List<TreeNode> nodeList = new List<TreeNode>();
             var nodes = await _zookeeperClient.GetChildrenAsync(path);
-            for (int i = 1; i < nodes.Count + 1; i++)
+            for (int i = 0; i < nodes.Count; i++)
             {
-
-                var nPath = $"{path}/{nodes[i]}";
-                var n = await _zookeeperClient.GetZKDataAsync<string>(nPath);
+                int idx = i + 1;
+                var nPath = path == "/" ? $"{path}{nodes[i]}" : $"{path}/{nodes[i]}";
+                if (!await _zookeeperClient.ExistsAsync(nPath)) continue;
+                var dataResult = await _zookeeperClient.GetDataResultAsync(nPath);
 
                 nodeList.Add(new TreeNode
                 {
-                    id = parentId.HasValue ? int.Parse(parentId.ToString() + i) : i,
+                    id = parentId.HasValue ? int.Parse(parentId.ToString() + idx) : idx,
                     pId = parentId ?? 0,
                     name = nodes[i],
                     bakValue = nPath,
                     open = isOpen,
-                    isParent = n.Stat.getNumChildren() > 0
+                    isParent = dataResult.Stat.getNumChildren() > 0
                 });
             }
 

@@ -50,5 +50,11 @@
     "inputFiles": [
       "wwwroot/lib/blueimp-file-upload/js/jquery.iframe-transport.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Home/Index.min.js",
+    "inputFiles": [
+      "wwwroot/js/Home/Index.js"
+    ]
   }
 ]

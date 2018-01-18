@@ -1,108 +1,85 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/lib/ztree/js/jquery.ztree.excheck.js"></script>
+<script src="~/lib/ztree/js/jquery.ztree.exedit.js"></script>
+<script src="~/lib/ztree/js/jquery.ztree.core.js"></script>
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
+<div>
+    <div class="mgtIndex">
+        <div class="mgtIndex_left">
+            <ul id="zktree" class="ztree"></ul>
         </div>
-        <div class="item">
-            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
+        <div class="mgtIndex_right">
+            <div class="box box-success" style="padding-top: 3px;">
+                <div class="add-content">
+                    Path：<span id="config-address"></span>
+                </div>
+                <div class="add-div">
+                    <div class="add-right">
+                        <input id="add-encrypted" type="checkbox" name="name" value="" />
+                        <span>IsEncrypted</span>
+                        <input id="add-isparent" type="checkbox" name="name" value="" />
+                        <span>IsParent</span>
+                        <input name="submit_add" id="submit_add" data-id="add" type="button" class="input_button" value="Add">
+                        <input name="submit_export" id="submit_export" data-id="add" type="button" class="input_button" value="Export">
+                        <input id="submit_import" name="files[]" data-id="import" style="width:75px; display:inline !important;" type="file" value="Import" class="input_button">
+                    </div>
+                    <div class="add-left">
+                        <input id="add_key" data-id="add" type="text" placeholder="key" value="" />
+                        <input id="add_Value" data-id="add" type="text" placeholder="value" value="" />
+                        <input id="add_Decription" data-id="add" type="text" placeholder="description" value="" />
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner3.svg" alt="Package Management" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Bring in libraries from NuGet, Bower, and npm, and automate tasks using Grunt or Gulp.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525029&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner4.svg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
+            <div id="node-content"></div>
         </div>
     </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
 </div>
 
-<div class="row">
-    <div class="col-md-3">
-        <h2>Application uses</h2>
-        <ul>
-            <li>Sample pages using ASP.NET Core MVC</li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518004">Bower</a> for managing client-side libraries</li>
-            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>How to</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699318">Add client packages using Bower.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Overview</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Run &amp; Deploy</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
-        </ul>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="editModel">
+    <div class="modal-dialog" style=" min-width:460px;  margin-top: 60px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Edit Node</h4>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom:9px;">
+                    <label>Key:</label><label style=" margin-left:12px; font-size:16px; color:#3c8dbc" id="edit-key"></label>
+                </div>
+                <div>
+                    <label>Value:</label><br /><textarea style="width:100%; min-height:165px;" id="edit-value"></textarea>
+                </div>
+                <div>
+                    <label>Description:</label><br /><textarea style="width:100%" id="edit-desc">aaa</textarea>
+                </div>
+                <div>
+                    <label>IsEncrypted:</label><input type="checkbox" style="margin-left:6px;vertical-align: top" disabled="disabled" id="edit-encrypt" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnEditModel" data-loading-text="创建中...">保存</button>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="edit-path" value="" />
     </div>
 </div>
+
+<environment include="Development">
+    <script src="~/lib/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+    <script src="~/lib/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+    <script src="~/lib/blueimp-file-upload/js/jquery.fileupload.js"></script>
+    <script src="~/lib/blueimp-tmpl/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/Home/index.js" asp-append-version="true"></script>
+</environment>
+
+<environment exclude="Development">
+    <script src="~/lib/blueimp-file-upload/js/vendor/jquery.ui.widget.min.js"></script>
+    <script src="~/lib/blueimp-file-upload/js/jquery.iframe-transport.min.js"></script>
+    <script src="~/lib/blueimp-file-upload/js/jquery.fileupload.min.js"></script>
+    <script src="~/lib/blueimp-tmpl/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/js/Home/index.min.js" asp-append-version="true"></script>
+</environment>

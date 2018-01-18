@@ -575,6 +575,16 @@ namespace ZookeeperClient
             return zkData;
         }
 
+        public async Task<DataResult> GetDataResultAsync(string path)
+        {
+            return await GetDataResultAsync(path, isReturnNullIfPathNotExists: false);
+        }
+
+        public async Task<DataResult> GetDataResultAsync(string path, bool isReturnNullIfPathNotExists)
+        {
+            return await RetryUntilConnectedAsync(async () => (await this._zkConnection.GetDataAsync(path, HasListeners(path))));
+        }
+
         /// <summary>
         /// 获取所有子节点
         /// </summary>
