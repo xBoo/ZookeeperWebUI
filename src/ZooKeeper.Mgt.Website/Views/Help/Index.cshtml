@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<pre>
+配置中心使用说明：
+
+    1.Nuget 引用 Config.Keede.Library 2.0.0+
+
+    2.配置中心初始化需要用到如下参数
+        a.zookeeper 地址：   192.168.117.21:2181,192.168.117.22:2181,192.168.117.22:2182/configurations（测试环境，正式请咨询运维）
+        b.配置监听节点值样例："/$$ConfiguationDev/$$b2c/$$api/$$dev"
+</pre>
+<div>
+    老版配置中心导出工具下载：<a href="~/download/config_migration_tools.zip" >点此下载</a>
+</div>

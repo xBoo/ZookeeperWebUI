@@ -1,0 +1,15 @@
+{
+  "name": "asp.net",
+  "private": true,
+  "dependencies": {
+    "jquery": "3.2.1",
+    "jquery-validation": "1.17.0",
+    "jQuery": "3.2.1",
+    "underscore": "1.8.3",
+    "bootstrap": "v3.3.7"
+  },
+  "resolutions": {
+    "jquery": "3.2.1",
+    "jquery-validation": "1.17.0"
+  }
+}

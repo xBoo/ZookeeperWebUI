@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/lib/ztree/js/jquery.ztree.excheck.js"></script>
+<script src="~/lib/ztree/js/jquery.ztree.exedit.js"></script>
+<script src="~/lib/ztree/js/jquery.ztree.core.js"></script>
+
+<div>
+    <div class="mgtIndex">
+        <div class="mgtIndex_left">
+            <ul id="zktree" class="ztree"></ul>
+        </div>
+        <div class="mgtIndex_right">
+            <div class="box box-success" style="padding-top: 3px;">
+                <div class="add-content">
+                    Path：<span id="config-address"></span>
+                </div>
+                <div class="add-div">
+                    <div class="add-right">
+                        <input id="add-encrypted" type="checkbox" name="name" value="" />
+                        <span>IsEncrypted</span>
+                        <input id="add-isparent" type="checkbox" name="name" value="" />
+                        <span>IsParent</span>
+                        <input name="submit_add" id="submit_add" data-id="add" type="button" class="input_button" value="Add">
+                        <input name="submit_export" id="submit_export" data-id="add" type="button" class="input_button" value="Export">
+                        <input id="submit_import" name="files[]" data-id="import" style="width:75px; display:inline !important;" type="file" value="Import" class="input_button">
+                    </div>
+                    <div class="add-left">
+                        <input id="add_key" data-id="add" type="text" placeholder="key" value="" />
+                        <input id="add_Value" data-id="add" type="text" placeholder="value" value="" />
+                        <input id="add_Decription" data-id="add" type="text" placeholder="description" value="" />
+                    </div>
+                </div>
+            </div>
+            <div id="node-content"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="editModel">
+    <div class="modal-dialog" style=" min-width:460px;  margin-top: 60px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Edit Node</h4>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom:9px;">
+                    <label>Key:</label><label style=" margin-left:12px; font-size:16px; color:#3c8dbc" id="edit-key"></label>
+                </div>
+                <div>
+                    <label>Value:</label><br /><textarea style="width:100%; min-height:165px;" id="edit-value"></textarea>
+                </div>
+                <div>
+                    <label>Description:</label><br /><textarea style="width:100%" id="edit-desc">aaa</textarea>
+                </div>
+                <div>
+                    <label>IsEncrypted:</label><input type="checkbox" style="margin-left:6px;vertical-align: top" disabled="disabled" id="edit-encrypt" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnEditModel" data-loading-text="创建中...">保存</button>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="edit-path" value="" />
+    </div>
+</div>
+
+<environment include="Development">
+    <script src="~/lib/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+    <script src="~/lib/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+    <script src="~/lib/blueimp-file-upload/js/jquery.fileupload.js"></script>
+    <script src="~/lib/blueimp-tmpl/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/index.js" asp-append-version="true"></script>
+</environment>
+
+<environment exclude="Development">
+    <script src="~/lib/blueimp-file-upload/js/vendor/jquery.ui.widget.min.js"></script>
+    <script src="~/lib/blueimp-file-upload/js/jquery.iframe-transport.min.js"></script>
+    <script src="~/lib/blueimp-file-upload/js/jquery.fileupload.min.js"></script>
+    <script src="~/lib/blueimp-tmpl/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/js/index.min.js" asp-append-version="true"></script>
+</environment>

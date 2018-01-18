@@ -1,0 +1,71 @@
+﻿
+<script id="pagingTablePager" type="text/template">
+    <%
+    var begin;
+    var end;
+    var pageIndex=obj.pageIndex;
+
+    if(pageIndex>4)
+    {
+    begin=pageIndex-2;
+    end=pageIndex+2;
+    }
+    else
+    {
+    begin=1;
+    end=5;
+    }
+
+    if(end>obj.totalPage)
+    {
+    end=obj.totalPage;
+    }
+
+    %>
+    <div class="pull-left">
+        <input type="hidden" id="txtPageTotalCount" value="<%=obj.totalPage%>" />
+        @*<div style="float:left;margin:26px 20px;"> 共<%=obj.TotalCount%>条</div>*@
+        <ul class="pagination">
+            <li><a href="javascript:void(0)" data-page="1">First</a></li>
+            <%if(pageIndex==1)  {%>
+            <li class="disabled">
+                <a href="javascript:void(0)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <% } else {%>
+            <li>
+                <a href="javascript:void(0)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <%}%>
+            <% for(var i=begin;i<=end;i++) {%>
+            <%if(i==pageIndex)
+            {%>
+            <li class="active" flag="active"><a href="javascript:void(0)" data-page="<%=i%>"><%=i%></a></li>
+            <% }
+            else
+            {%>
+            <li><a href="javascript:void(0)" data-page="<%=i%>"><%=i%></a></li>
+            <% }%>
+            <%}%>
+
+            <%if(pageIndex==obj.totalPage)  {%>
+            <li class="disabled">
+                <a href="javascript:void(0)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            <% } else {%>
+            <li>
+                <a href="javascript:void(0)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            <%}%>
+            <li><a href="javascript:void(0)" data-page="<%=obj.totalPage%>">Last</a></li>
+        </ul>
+
+    </div>
+</script>

@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ZooKeeperWebUI</title>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    </environment>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    </environment>
+    <link href="~/css/dist/css/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/lib/ztree/css/metroStyle/metroStyle.css" rel="stylesheet" />
+    <script>
+        window.prefixURL = '@Url.Content("~/")';
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="margin-bottom: 0px !important;">
+        <div class="container" style="width:100%">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Config" asp-action="Index" class="navbar-brand">ZooKeeperWebUI.com</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                        <li><a asp-area="" asp-controller="Help" asp-action="Index">Help</a></li>
+                    </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content" style="width: 100%; padding-top:60px;">
+        @RenderBody()
+    </div>
+    @*<footer class="footer-hr">*@
+    <div>
+        <hr />
+        <p>&nbsp;&nbsp; &copy; 2017 -ZooKeeperWebUI.com</p>
+    </div>
+    @*</footer>*@
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

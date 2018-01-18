@@ -1,0 +1,54 @@
+[
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/css/site.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/index.min.js",
+    "inputFiles": [
+      "wwwroot/js/index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/jquery.fileupload/jquery.fileupload.min.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery.fileupload/jquery.fileupload.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/blueimp-file-upload/js/vendor/jquery.ui.widget.min.js",
+    "inputFiles": [
+      "wwwroot/lib/blueimp-file-upload/js/vendor/jquery.ui.widget.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/blueimp-file-upload/js/jquery.fileupload-ui.min.js",
+    "inputFiles": [
+      "wwwroot/lib/blueimp-file-upload/js/jquery.fileupload-ui.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/blueimp-file-upload/js/jquery.fileupload.min.js",
+    "inputFiles": [
+      "wwwroot/lib/blueimp-file-upload/js/jquery.fileupload.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/blueimp-file-upload/js/jquery.iframe-transport.min.js",
+    "inputFiles": [
+      "wwwroot/lib/blueimp-file-upload/js/jquery.iframe-transport.js"
+    ]
+  }
+]
