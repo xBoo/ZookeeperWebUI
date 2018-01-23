@@ -1,10 +1,14 @@
+using System;
+
 namespace ZooKeeper.Mgt.Website.Common
 {
     public class ZNode
     {
-        public string Key { get; set; }
+        public string Path { get; set; }
+        public int Version { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime ModifyTime { get; set; }
+        public string ACL { get; set; }
         public string Value { get; set; }
-        public bool IsEncryptDisplay { get; set; } = false;
-        public string Description { get; set; }
     }
 }

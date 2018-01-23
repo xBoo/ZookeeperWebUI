@@ -35,7 +35,7 @@ namespace ZooKeeper.Mgt.Website
             var path = $"/$${Configuration["RootNodeName"]}";
             var zkClient = new ZooKeeperClient(Configuration["ZooKeeperAddress"]);
             bool exist = zkClient.ExistsAsync(path).ConfigureAwait(false).GetAwaiter().GetResult();
-            if (!exist) zkClient.CreatePersistentAsync(path, new ZNode { Key = Configuration["RootNodeName"], Value = "Root Node", Description = "" }).ConfigureAwait(false).GetAwaiter().GetResult();
+            if (!exist) zkClient.CreatePersistentAsync(path, "root").ConfigureAwait(false).GetAwaiter().GetResult();
 
             services.AddSingleton<IZooKeeperClient>(zkClient);
             services.AddMvc(options =>

@@ -46,6 +46,7 @@
     border: 1px solid #ddd;
     height: 100%;
     min-height: 780px;
+    min-width: 200px;
 }
 
 .mgtIndex_middle {
@@ -59,12 +60,14 @@
 .mgtIndex_right {
     display: block;
     border: 1px solid #ddd;
-    margin-left: 6px;
-    padding: 6px;
     display: block;
-    margin-right: 6px;
     width: 100%;
+    background-color: #ecf0f5;
 }
+
+    .mgtIndex_right > div {
+        padding: 0px 3px;
+    }
 
 .app-root-node {
     overflow: hidden;
@@ -131,6 +134,15 @@
     color: #666;
 }
 
+.add-content-textarea {
+    padding-left: 12px;
+    padding-top: 6px;
+    min-height: 200px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #666;
+    vertical-align: top;
+}
 
 
 .add-right {
@@ -223,4 +235,36 @@
     margin-right: 38px;
     height: 21px;
     padding-top: 4px;
+}
+
+.node-header {
+    position: relative;
+    background: #fff;
+    border: 1px solid #f4f4f4;
+    padding: 12px;
+    margin: 3px 0px;
+}
+
+.node-option {
+    display: inline-block;
+}
+
+    .node-option > button {
+        width: 60px;
+        float: left;
+        margin-left: 6px;
+        margin-top: 0px;
+    }
+
+.ul-node {
+      margin-bottom:12px;   
+    }
+
+.ul-node li {
+    line-height:32px;
+}
+
+.ul-node>li>label {
+    padding-left:12px;
+    margin-bottom:0px;
 }

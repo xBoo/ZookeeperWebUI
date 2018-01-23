@@ -13,28 +13,34 @@
             <ul id="zktree" class="ztree"></ul>
         </div>
         <div class="mgtIndex_right">
-            <div class="box box-success" style="padding-top: 3px;">
-                <div class="add-content">
-                    Path：<span id="config-address"></span>
-                </div>
-                <div class="add-div">
-                    <div class="add-right">
-                        <input id="add-encrypted" type="checkbox" name="name" value="" />
-                        <span>IsEncrypted</span>
-                        <input id="add-isparent" type="checkbox" name="name" value="" />
-                        <span>IsParent</span>
-                        <input name="submit_add" id="submit_add" data-id="add" type="button" class="input_button" value="Add">
-                        <input name="submit_export" id="submit_export" data-id="add" type="button" class="input_button" value="Export">
-                        <input id="submit_import" name="files[]" data-id="import" style="width:75px; display:inline !important;" type="file" value="Import" class="input_button">
+            <div class="col-xs-12">
+                <section class="node-header">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2 class="page-header">
+                                <i class="fa fa-globe"></i> Node Information
+                            </h2>
+                        </div>
                     </div>
-                    <div class="add-left">
-                        <input id="add_key" data-id="add" type="text" placeholder="key" value="" />
-                        <input id="add_Value" data-id="add" type="text" placeholder="value" value="" />
-                        <input id="add_Decription" data-id="add" type="text" placeholder="description" value="" />
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <ul class="ul-node">
+                                <li>Path:<label id="lb-path"></label></li>
+                                <li>Version:<label id="lb-version"></label></li>
+                                <li>CreateTime:<label id="lb-createtime"></label></li>
+                                <li>ModifyTime:<label id="lb-modifytime"></label></li>
+                                <li>ACL:<label id="lb-acl"></label></li>
+                                <li>Value:<label id="lb-value"></label></li>
+                            </ul>
+                            <h2 class="page-header"></h2>
+                            <div class="node-option">
+                                <button type="button" class="btn btn-success">Edit</button>
+                                <button type="button" class="btn btn-danger">Delete</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </section>
             </div>
-            <div id="node-content"></div>
         </div>
     </div>
 </div>

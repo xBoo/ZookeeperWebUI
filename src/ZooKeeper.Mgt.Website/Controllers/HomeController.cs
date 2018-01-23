@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using ZooKeeper.Mgt.Website.Models;
 using ZookeeperClient;
 using ZooKeeper.Mgt.Website.Common;
+using ZookeeperClient.model;
+using org.apache.zookeeper;
 
 namespace ZooKeeper.Mgt.Website.Controllers
 {
@@ -53,6 +57,26 @@ namespace ZooKeeper.Mgt.Website.Controllers
             }
         }
 
+
+        public async Task<BizResult<ZNode>> GetNode(string path)
+        {
+            var data = await _zookeeperClient.GetDataResultAsync(path);
+            return new BizResult<ZNode>(new ZNode
+            {
+                CreateTime = ConvertDatetime(data.Stat.getCtime()),
+                ModifyTime = ConvertDatetime(data.Stat.getMtime()),
+                Path = path,
+                Value = Encoding.UTF8.GetString(data.Data),
+                Version = data.Stat.getVersion()
+            });
+        }
+
+        private DateTime ConvertDatetime(long unixTimestamp)
+        {
+            var startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); // 当地时区
+            return startTime.AddMilliseconds(unixTimestamp);
+        }
+
         private async Task<List<TreeNode>> GetChildrenNodesAsync(string path, int? parentId, bool isOpen)
         {
             List<TreeNode> nodeList = new List<TreeNode>();
@@ -77,5 +101,7 @@ namespace ZooKeeper.Mgt.Website.Controllers
 
             return nodeList.OrderBy(o => o.name).ToList();
         }
+
+
     }
 }
