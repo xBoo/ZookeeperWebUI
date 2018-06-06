@@ -30,12 +30,28 @@
                                 <li>CreateTime:<label id="lb-createtime"></label></li>
                                 <li>ModifyTime:<label id="lb-modifytime"></label></li>
                                 <li>ACL:<label id="lb-acl"></label></li>
-                                <li>Value:<label id="lb-value"></label></li>
+                                <li>
+                                    Value:
+                                    <ul id="myTab" class="nav nav-tabs">
+                                        <li class="active">
+                                            <a href="#text" data-toggle="tab">text</a>
+                                        </li>
+                                        <li><a href="#json" data-toggle="tab">Json</a></li>
+                                    </ul>
+                                    <div id="myTabContent" class="tab-content">
+                                        <div class="tab-pane fade in active" id="text">
+                                            <textarea id="lb-value"></textarea>
+                                        </div>
+                                        <div class="tab-pane fade" id="json">
+                                            <textarea id="lb-jsonvalue"></textarea>
+                                        </div>
+                                    </div>
+                                </li>
                             </ul>
                             <h2 class="page-header"></h2>
                             <div class="node-option">
-                                <button type="button" class="btn btn-success">Edit</button>
-                                <button type="button" class="btn btn-danger">Delete</button>
+                                <button type="button" id="btnEdit" class="btn btn-success">Edit</button>
+                                <button type="button" id="btnDelete" class="btn btn-danger">Delete</button>
                             </div>
                         </div>
                     </div>

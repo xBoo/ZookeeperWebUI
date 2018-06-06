@@ -1,33 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
-using log4net;
+using org.apache.utils;
 using org.apache.zookeeper;
 using org.apache.zookeeper.data;
-using ZookeeperClient.log;
+using ZookeeperClient;
 
 namespace ZookeeperClient.connection
 {
     public class ZKConnection : IZKConnection
     {
         static readonly TimeSpan DEFAULT_SESSION_TIMEOUT = new TimeSpan(0, 0, 0, 3);
-        readonly string _address;
-        TimeSpan _sessionTimeout;
+        private readonly string _address;
+        private readonly TimeSpan _sessionTimeout;
         org.apache.zookeeper.ZooKeeper _zooKeeper;
         static readonly object _connectLock = new object();
 
-        private static readonly ILog _logWriter = LogManager.GetLogger(typeof(ZKConnection));
+        private readonly ILogConsumer _logWriter;
 
-        public ZKConnection(string address, TimeSpan sessionTimeout)
+        public ZKConnection(string address, TimeSpan sessionTimeout, ILogConsumer logger)
         {
             this._address = address;
             this._sessionTimeout = sessionTimeout;
-            org.apache.zookeeper.ZooKeeper.CustomLogConsumer = new CunstomerLog();
+            this._logWriter = logger;
         }
 
-        public ZKConnection(string address) : this(address, DEFAULT_SESSION_TIMEOUT)
-        {
-        }
+        public ZKConnection(string address, TimeSpan sessionTimeout) : this(address, sessionTimeout, null) { }
+
+        public ZKConnection(string address) : this(address, DEFAULT_SESSION_TIMEOUT) { }
 
         public void Connect(Watcher watcher)
         {
@@ -35,13 +36,17 @@ namespace ZookeeperClient.connection
             {
                 if (_zooKeeper != null)
                 {
-                    _logWriter.Error("ZooKeeper client has been started");
+                    this.LogInfo("ZooKeeper client has been started");
                 }
 
-
-                _zooKeeper = new org.apache.zookeeper.ZooKeeper(_address, (int)_sessionTimeout.TotalMilliseconds, watcher);
-                _logWriter.Info($"ZooKeeper client has been created and connect to {this._address}");
+                this._zooKeeper = new org.apache.zookeeper.ZooKeeper(_address, (int)_sessionTimeout.TotalMilliseconds, watcher);
+                this.LogInfo($"ZooKeeper client has been created and connect to {this._address}");
             }
+        }
+
+        private void LogInfo(string message)
+        {
+            _logWriter.Log(TraceLevel.Info, nameof(ZKConnection), message, null);
         }
 
         public void ReConnect(Watcher watcher)
@@ -55,7 +60,8 @@ namespace ZookeeperClient.connection
             lock (_connectLock)
             {
                 if (_zooKeeper == null) return;
-                _logWriter.Info($"Closing ZooKeeper connected to {this._address}");
+                this.LogInfo($"Closing ZooKeeper connected to {this._address}");
+
 
                 Task.Run(async () =>
                 {

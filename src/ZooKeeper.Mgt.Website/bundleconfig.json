@@ -56,5 +56,11 @@
     "inputFiles": [
       "wwwroot/js/Home/Index.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/css/index.min.css",
+    "inputFiles": [
+      "wwwroot/css/index.css"
+    ]
   }
 ]

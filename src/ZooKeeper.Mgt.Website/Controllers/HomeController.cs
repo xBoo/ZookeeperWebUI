@@ -57,7 +57,6 @@ namespace ZooKeeper.Mgt.Website.Controllers
             }
         }
 
-
         public async Task<BizResult<ZNode>> GetNode(string path)
         {
             var data = await _zookeeperClient.GetDataResultAsync(path);
@@ -102,6 +101,22 @@ namespace ZooKeeper.Mgt.Website.Controllers
             return nodeList.OrderBy(o => o.name).ToList();
         }
 
+        [HttpPost]
+        public async Task<BizResult<bool>> UpdateNode(string path, string value)
+        {
+            var exist = await _zookeeperClient.ExistsAsync(path);
+            if (!exist) return new BizResult<bool>(false, -1, $"Node path '{path}' was not found");
+
+            await _zookeeperClient.SetDataAsync(path, value);
+            return new BizResult<bool>(true);
+        }
+
+
+        public async Task<BizResult<bool>> DeleteNode(string path)
+        {
+            await _zookeeperClient.DeleteAsync(path);
+            return new BizResult<bool>(true);
+        }
 
     }
 }

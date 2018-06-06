@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net452;net462</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <Description></Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>1.0.4.4</Version>
@@ -27,7 +27,7 @@
 
   <ItemGroup>
    <PackageReference Include="log4net" Version="2.0.8" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="ZooKeeperNetEx" Version="3.4.10.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="ZooKeeperNetEx" Version="3.4.12" />
   </ItemGroup>
 </Project>

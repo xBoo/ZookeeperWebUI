@@ -257,14 +257,20 @@
     }
 
 .ul-node {
-      margin-bottom:12px;   
-    }
-
-.ul-node li {
-    line-height:32px;
+    margin-bottom: 12px;
 }
 
-.ul-node>li>label {
-    padding-left:12px;
-    margin-bottom:0px;
+    .ul-node li {
+        line-height: 32px;
+    }
+
+    .ul-node > li > label {
+        padding-left: 12px;
+        margin-bottom: 0px;
+    }
+
+
+.tab-content > div > textarea {
+    width: 100%;
+    min-height: 120px;
 }

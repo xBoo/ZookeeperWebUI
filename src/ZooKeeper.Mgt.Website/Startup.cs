@@ -32,9 +32,10 @@ namespace ZooKeeper.Mgt.Website
             });
             services.AddSingleton<IConfiguration>(Configuration);
 
-            var path = $"/$${Configuration["RootNodeName"]}";
             var zkClient = new ZooKeeperClient(Configuration["ZooKeeperAddress"]);
-            bool exist = zkClient.ExistsAsync(path).ConfigureAwait(false).GetAwaiter().GetResult();
+
+            var path = $"/{Configuration["RootNodeName"]}";
+            var exist = zkClient.ExistsAsync(path).ConfigureAwait(false).GetAwaiter().GetResult();
             if (!exist) zkClient.CreatePersistentAsync(path, "root").ConfigureAwait(false).GetAwaiter().GetResult();
 
             services.AddSingleton<IZooKeeperClient>(zkClient);
