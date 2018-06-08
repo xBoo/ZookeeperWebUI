@@ -6,6 +6,10 @@ using Microsoft.Extensions.Logging;
 using ZooKeeper.Mgt.Website.Common;
 using ZooKeeper.Mgt.Website.Filter;
 using ZookeeperClient;
+using Swashbuckle.AspNetCore.Swagger;
+using System.IO;
+using System.Reflection;
+using System.Linq;
 
 namespace ZooKeeper.Mgt.Website
 {
@@ -43,6 +47,16 @@ namespace ZooKeeper.Mgt.Website
             {
                 options.Filters.Add(typeof(ExceptionFilter));
             });
+
+            services.AddSwaggerGen(option =>
+            {
+                option.SwaggerDoc("v1", new Info { Title = "API Document", Version = "v1.0" });
+
+                foreach (var file in Directory.GetFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)).Where(w => w.EndsWith(".xml")))
+                {
+                    option.IncludeXmlComments(file);
+                }
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +73,12 @@ namespace ZooKeeper.Mgt.Website
             }
 
             app.UseStaticFiles();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(config =>
+            {
+                config.SwaggerEndpoint("/swagger/v1/swagger.json", "API Document v1.0");
+            });
 
             app.UseMvc(routes =>
             {

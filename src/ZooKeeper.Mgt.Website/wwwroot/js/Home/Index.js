@@ -1,9 +1,10 @@
 ﻿var setting = {
     view: {
+        addHoverDom: addHoverDom,
         selectedMulti: false
     },
     edit: {
-        enable: true,
+        enable: false,
         showRemoveBtn: false,
         showRenameBtn: false
     },
@@ -77,9 +78,39 @@ $(document).ready(function () {
         });
     });
 
+    $("#btnAddModel").bind("click", function () {
+        var path = $("#edit-path").val();
+        var name = $("#edit-name").val();
+        var value = $("#edit-value").val();
+
+        if (name === "") {
+            alert("name can not be null")
+            return;
+        }
+        $.ajax({
+            url: "/Home/CreateNode",
+            type: "Post",
+            datatype: "Json",
+            data: {
+                path: path + "/" + name,
+                value: value,
+                createModel: "PERSISTENT"
+            },
+            success: function (data) {
+                if (data.businessCode !== -1) {
+                    init();
+                } else
+                    alert(data.businessMessage);
+            },
+            error: function (data) {
+                alert("error");
+            }
+        });
+
+    });
+
     init();
 });
-
 
 function init() {
     var url = "/Home/GetNodes?path=/";
@@ -183,3 +214,26 @@ function showNode(treeNode) {
         }
     });
 }
+
+function removeHoverDom(treeId, treeNode) {
+    $("#addBtn_" + treeNode.tId).unbind().remove();
+};
+
+
+var newCount = 1;
+function addHoverDom(treeId, treeNode) {
+    var sObj = $("#" + treeNode.tId + "_span");
+    if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0) return;
+
+    var treeNodeVal = treeNode.bakValue;
+    var addStr = "<span class='button add' id='addBtn_" + treeNode.tId + "' title='add node' onfocus='this.blur();'></span>";
+    sObj.after(addStr);
+
+    var btn = $("#addBtn_" + treeNode.tId);
+    if (btn) btn.bind("click", function () {
+        $("#edit-path").val(treeNodeVal);
+        $("#addModel").modal('show');
+        return true;
+    });
+
+};

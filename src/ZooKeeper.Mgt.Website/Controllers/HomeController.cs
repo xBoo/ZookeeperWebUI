@@ -118,5 +118,26 @@ namespace ZooKeeper.Mgt.Website.Controllers
             return new BizResult<bool>(true);
         }
 
+        /// <summary>
+        /// create node
+        /// </summary>
+        /// <param name="node">node value</param>
+        [HttpPost]
+        public async Task<BizResult<bool>> CreateNode([FromBody]CreateNode node)
+        {
+            if (await _zookeeperClient.ExistsAsync(node.Path)) return new BizResult<bool>(false, -1, $"Node '{node.Path}' already exists!");
+            await _zookeeperClient.CreateAsync(node.Path, node.Value, node.CreateMode ?? CreateMode.PERSISTENT);
+            return new BizResult<bool>(true);
+        }
+
+    }
+
+    public class CreateNode
+    {
+        public string Path { get; set; }
+
+        public string Value { get; set; }
+
+        public CreateMode CreateMode { get; set; } = CreateMode.PERSISTENT;
     }
 }

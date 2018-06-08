@@ -3,10 +3,18 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<link href="~/lib/ztree/css/metroStyle/metroStyle.css" rel="stylesheet" />
+
+
+<script src="~/lib/ztree/js/jquery-1.4.4.min.js"></script>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+<script src="~/lib/ztree/js/jquery.ztree.core.js"></script>
 <script src="~/lib/ztree/js/jquery.ztree.excheck.js"></script>
 <script src="~/lib/ztree/js/jquery.ztree.exedit.js"></script>
-<script src="~/lib/ztree/js/jquery.ztree.core.js"></script>
-
 <div>
     <div class="mgtIndex">
         <div class="mgtIndex_left">
@@ -61,28 +69,22 @@
     </div>
 </div>
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="editModel">
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="addModel">
     <div class="modal-dialog" style=" min-width:460px;  margin-top: 60px;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">Edit Node</h4>
+                <h4 class="modal-title">Add Node</h4>
             </div>
             <div class="modal-body">
                 <div style="margin-bottom:9px;">
-                    <label>Key:</label><label style=" margin-left:12px; font-size:16px; color:#3c8dbc" id="edit-key"></label>
+                    <label>Name:</label><br /><input type="text" style="width:100%;" id="edit-name" value="" />
                 </div>
                 <div>
                     <label>Value:</label><br /><textarea style="width:100%; min-height:165px;" id="edit-value"></textarea>
                 </div>
-                <div>
-                    <label>Description:</label><br /><textarea style="width:100%" id="edit-desc">aaa</textarea>
-                </div>
-                <div>
-                    <label>IsEncrypted:</label><input type="checkbox" style="margin-left:6px;vertical-align: top" disabled="disabled" id="edit-encrypt" />
-                </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btnEditModel" data-loading-text="创建中...">保存</button>
+                    <button type="button" class="btn btn-primary" id="btnAddModel" data-loading-text="Create...">Save</button>
                 </div>
             </div>
         </div>
@@ -90,18 +92,4 @@
     </div>
 </div>
 
-<environment include="Development">
-    <script src="~/lib/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-    <script src="~/lib/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-    <script src="~/lib/blueimp-file-upload/js/jquery.fileupload.js"></script>
-    <script src="~/lib/blueimp-tmpl/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="~/js/Home/index.js" asp-append-version="true"></script>
-</environment>
-
-<environment exclude="Development">
-    <script src="~/lib/blueimp-file-upload/js/vendor/jquery.ui.widget.min.js"></script>
-    <script src="~/lib/blueimp-file-upload/js/jquery.iframe-transport.min.js"></script>
-    <script src="~/lib/blueimp-file-upload/js/jquery.fileupload.min.js"></script>
-    <script src="~/lib/blueimp-tmpl/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/js/Home/index.min.js" asp-append-version="true"></script>
-</environment>
+<script src="~/js/Home/Index.js"></script>
